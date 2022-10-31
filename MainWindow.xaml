@@ -1,0 +1,55 @@
+﻿<Window x:Class="Tema4_Superheroes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tema4_Superheroes"
+        mc:Ignorable="d"
+        Title="Superheroes" Height="450" Width="800" Icon="Imagenes\shield.ico">
+    <Window.Resources>
+        <local:ConvertidorFondo x:Key="ConvertirFondo"/>
+        <Style x:Key="flechas" TargetType="{x:Type Image}">
+            <Setter Property="FrameworkElement.Width" Value="24"/>
+            <Setter Property="Image.Source" Value="Imagenes/arrow.png"/>
+        </Style>
+        <Style x:Key="contador" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextBlock.FontSize" Value="20"/>
+            <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel x:Name="superheroeDockPanel"
+             Background="{Binding Path=Heroe, Converter={StaticResource conversorFondo}}">
+        <DockPanel LastChildFill="false" Dock="Top">
+            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Bottom" FontSize="40" Foreground="White"
+                 FontFamily="Segoe UI Black" Margin="10,0,0,0" Text="{Binding Path=Nombre}">
+        <UIElement.Effect>
+          <DropShadowEffect/>
+        </UIElement.Effect>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Bottom">
+                <Image Source="Imagenes/avengers.png" Width="40" Margin="0,0,10,0"
+               Visibility="{Binding Path=Vengador, Converter={StaticResource conversorVisibilidad}}"/>
+                <Image Source="Imagenes/xmen.png" Width="60"
+               Visibility="{Binding Path=Xmen, Converter={StaticResource conversorVisibilidad}}"/>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Image MouseLeftButtonUp="leftImage_MouseLeftButtonUp" x:Name="leftImage" Style="{StaticResource flechas}"/>
+            <TextBlock x:Name="actualTextBlock" Style="{StaticResource contador}" Margin="5,0,0,5"/>
+            <TextBlock Style="{StaticResource contador}" Margin="0,0,0,5">/</TextBlock>
+            <TextBlock x:Name="totalTextBlock" Style="{StaticResource contador}" Margin="0,0,5,5"/>
+            <Image MouseLeftButtonUp="rightImage_MouseLeftButtonUp" x:Name="rightImage"
+             Style="{StaticResource flechas}" RenderTransformOrigin="0.5,0.5">
+                <UIElement.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                        <SkewTransform AngleY="0" AngleX="0"/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </UIElement.RenderTransform>
+            </Image>
+        </StackPanel>
+        <Image Stretch="UniformToFill" Margin="10" Source="{Binding Path=Imagen}"/>
+    </DockPanel>
+</Window>
