@@ -66,6 +66,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MainWindowsVM.cs" />
     <Compile Include="ConvertidorEmblema.cs" />
     <Compile Include="ConvertidorFondo.cs" />
     <Compile Include="Superheroes.cs" />
