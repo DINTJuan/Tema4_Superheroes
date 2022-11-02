@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Superheroes" Height="450" Width="800" Icon="Imagenes\shield.ico">
     <Window.Resources>
-        <local:ConvertidorFondo x:Key="ConvertirFondo"/>
+        <local:ConvertidorFondo x:Key="convertirfondo"/>
+        <local:ConvertidorEmblema x:Key="convertiremblema"/>
         <Style x:Key="flechas" TargetType="{x:Type Image}">
             <Setter Property="FrameworkElement.Width" Value="24"/>
             <Setter Property="Image.Source" Value="Imagenes/arrow.png"/>
@@ -18,7 +19,7 @@
         </Style>
     </Window.Resources>
     <DockPanel x:Name="superheroeDockPanel"
-             Background="{Binding Path=Heroe, Converter={StaticResource conversorFondo}}">
+             Background="{Binding Path=Heroe, Converter={StaticResource convertirfondo}}">
         <DockPanel LastChildFill="false" Dock="Top">
             <TextBlock DockPanel.Dock="Left" VerticalAlignment="Bottom" FontSize="40" Foreground="White"
                  FontFamily="Segoe UI Black" Margin="10,0,0,0" Text="{Binding Path=Nombre}">
@@ -28,17 +29,17 @@
             </TextBlock>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Bottom">
                 <Image Source="Imagenes/avengers.png" Width="40" Margin="0,0,10,0"
-               Visibility="{Binding Path=Vengador, Converter={StaticResource conversorVisibilidad}}"/>
+               Visibility="{Binding Path=Vengador, Converter={StaticResource convertiremblema}}"/>
                 <Image Source="Imagenes/xmen.png" Width="60"
-               Visibility="{Binding Path=Xmen, Converter={StaticResource conversorVisibilidad}}"/>
+               Visibility="{Binding Path=Xmen, Converter={StaticResource convertiremblema}}"/>
             </StackPanel>
         </DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Image MouseLeftButtonUp="leftImage_MouseLeftButtonUp" x:Name="leftImage" Style="{StaticResource flechas}"/>
+            <Image MouseLeftButtonUp="ImagenIzquierda_MouseLeftButtonUp" x:Name="ImagenIzquierda" Style="{StaticResource flechas}"/>
             <TextBlock x:Name="actualTextBlock" Style="{StaticResource contador}" Margin="5,0,0,5"/>
             <TextBlock Style="{StaticResource contador}" Margin="0,0,0,5">/</TextBlock>
             <TextBlock x:Name="totalTextBlock" Style="{StaticResource contador}" Margin="0,0,5,5"/>
-            <Image MouseLeftButtonUp="rightImage_MouseLeftButtonUp" x:Name="rightImage"
+            <Image MouseLeftButtonUp="ImagenDerecha_MouseLeftButtonUp" x:Name="ImagenDerecha"
              Style="{StaticResource flechas}" RenderTransformOrigin="0.5,0.5">
                 <UIElement.RenderTransform>
                     <TransformGroup>

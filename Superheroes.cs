@@ -1,18 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Tema4_Superheroes
 {
-    class Superheroes
+    class Superheroes : INotifyPropertyChanged
     {
-        public string Nombre { get; set; }
-        public string Imagen { get; set; }
-        public bool Vengador { get; set; }
-        public bool Xmen { get; set; }
-        public bool Heroe { get; set; }
+        public string Nombre
+        {
+            get { return Nombre; }
+            set { Nombre = value; NotifyPropertyChanged("Nombre"); }
+
+        }
+        public string Imagen
+        {
+            get { return Imagen; }
+            set { Imagen = value; NotifyPropertyChanged("Nombre"); }
+
+        }
+        public bool Vengador
+        {
+            get { return Vengador; }
+            set { Vengador = value; NotifyPropertyChanged("Nombre"); }
+
+        }
+        public bool Xmen
+        {
+            get { return Xmen; }
+            set { Xmen = value; NotifyPropertyChanged("Nombre"); }
+
+        }
+        public bool Heroe
+        {
+            get { return Heroe; }
+            set { Heroe = value; NotifyPropertyChanged("Nombre"); }
+
+        }
+
 
         public Superheroes()
         {
@@ -25,6 +52,13 @@ namespace Tema4_Superheroes
             Vengador = vengador;
             Xmen = xmen;
             Heroe = heroe;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void NotifyPropertyChanged(string propertyName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public static List<Superheroes> GetSamples()
