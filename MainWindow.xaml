@@ -18,7 +18,7 @@
             <Setter Property="TextBlock.FontWeight" Value="Bold"/>
         </Style>
     </Window.Resources>
-    <DockPanel x:Name="superheroeDockPanel"
+    <DockPanel x:Name="superheroeDockPanel" DataContext="{Binding Path=HeroeActual}"
              Background="{Binding Path=Heroe, Converter={StaticResource convertirfondo}}">
         <DockPanel LastChildFill="false" Dock="Top">
             <TextBlock DockPanel.Dock="Left" VerticalAlignment="Bottom" FontSize="40" Foreground="White"
