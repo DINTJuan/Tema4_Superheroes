@@ -18,27 +18,27 @@
             <Setter Property="TextBlock.FontWeight" Value="Bold"/>
         </Style>
     </Window.Resources>
-    <DockPanel x:Name="superheroeDockPanel" DataContext="{Binding Path=HeroeActual}"
-             Background="{Binding Path=Heroe, Converter={StaticResource convertirfondo}}">
+    <DockPanel x:Name="superheroeDockPanel"
+             Background="{Binding Path=HeroeActual.Heroe, Converter={StaticResource convertirfondo}}">
         <DockPanel LastChildFill="false" Dock="Top">
             <TextBlock DockPanel.Dock="Left" VerticalAlignment="Bottom" FontSize="40" Foreground="White"
-                 FontFamily="Segoe UI Black" Margin="10,0,0,0" Text="{Binding Path=Nombre}">
+                 FontFamily="Segoe UI Black" Margin="10,0,0,0" Text="{Binding Path=HeroeActual.Nombre}">
         <UIElement.Effect>
           <DropShadowEffect/>
         </UIElement.Effect>
             </TextBlock>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Bottom">
                 <Image Source="Imagenes/avengers.png" Width="40" Margin="0,0,10,0"
-               Visibility="{Binding Path=Vengador, Converter={StaticResource convertiremblema}}"/>
+               Visibility="{Binding Path=HeroeActual.Vengador, Converter={StaticResource convertiremblema}}"/>
                 <Image Source="Imagenes/xmen.png" Width="60"
-               Visibility="{Binding Path=Xmen, Converter={StaticResource convertiremblema}}"/>
+               Visibility="{Binding Path=HeroeActual.Xmen, Converter={StaticResource convertiremblema}}"/>
             </StackPanel>
         </DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
             <Image MouseLeftButtonUp="ImagenIzquierda_MouseLeftButtonUp" x:Name="ImagenIzquierda" Style="{StaticResource flechas}"/>
-            <TextBlock x:Name="actualTextBlock" Style="{StaticResource contador}" Margin="5,0,0,5"/>
+            <TextBlock x:Name="actualTextBlock" Style="{StaticResource contador}" Margin="5,0,0,5" Text="{Binding Path=ContadorActual}"/>
             <TextBlock Style="{StaticResource contador}" Margin="0,0,0,5">/</TextBlock>
-            <TextBlock x:Name="totalTextBlock" Style="{StaticResource contador}" Margin="0,0,5,5"/>
+            <TextBlock x:Name="totalTextBlock" Style="{StaticResource contador}" Margin="0,0,5,5" Text="{Binding Path=TotalHeroes}"/>
             <Image MouseLeftButtonUp="ImagenDerecha_MouseLeftButtonUp" x:Name="ImagenDerecha"
              Style="{StaticResource flechas}" RenderTransformOrigin="0.5,0.5">
                 <UIElement.RenderTransform>
@@ -51,6 +51,6 @@
                 </UIElement.RenderTransform>
             </Image>
         </StackPanel>
-        <Image Stretch="UniformToFill" Margin="10" Source="{Binding Path=Imagen}"/>
+        <Image Stretch="UniformToFill" Margin="10" Source="{Binding Path=HeroeActual.Imagen}"/>
     </DockPanel>
 </Window>

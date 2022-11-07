@@ -10,18 +10,25 @@ namespace Tema4_Superheroes
     class MainWindowsVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        
 
-        private Superheroes HeroeActual
+        public void NotifyPropertyChanged(string propertyName)
         {
-            get { return HeroeActual; }
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private Superheroes heroeActual;
+        public Superheroes HeroeActual
+        {
+            get { return heroeActual; }
             set
             {
-                HeroeActual = value;
+                heroeActual = value;
                 NotifyPropertyChanged("HeroeActual");
             }
         }
-        private int contadorActual
+        private int contadorActual;
+
+        public int ContadorActual
         {
             get { return contadorActual; }
             set
@@ -31,7 +38,9 @@ namespace Tema4_Superheroes
             }
             
         }
-        private int totalHeroes
+
+        private int totalHeroes;
+        public int TotalHeroes
         {
             get { return totalHeroes; }
             set
@@ -41,24 +50,24 @@ namespace Tema4_Superheroes
             }
         }
 
-        List<Superheroes> lista;
+        readonly List<Superheroes> lista;
         public MainWindowsVM()
         {
             lista = Superheroes.GetSamples();
-            contadorActual = 1;
+            ContadorActual = 1;
             HeroeActual = lista[contadorActual - 1];
-            totalHeroes = lista.Count;
+            TotalHeroes = lista.Count;
         }
 
         public void Avanzar()
         {
-            contadorActual++;
+            ContadorActual++;
             HeroeActual = lista[contadorActual - 1];
         }
 
         public void Retoceder()
         {
-            contadorActual--;
+            ContadorActual--;
             HeroeActual = lista[contadorActual - 1];
         }
     }

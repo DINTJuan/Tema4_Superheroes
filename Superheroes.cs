@@ -9,34 +9,39 @@ namespace Tema4_Superheroes
 {
     class Superheroes : INotifyPropertyChanged
     {
+        private string nombre;
         public string Nombre
         {
-            get { return Nombre; }
-            set { Nombre = value; NotifyPropertyChanged("Nombre"); }
+            get { return nombre; }
+            set { nombre = value; NotifyPropertyChanged("Nombre"); }
 
         }
+        private string imagen;
         public string Imagen
         {
-            get { return Imagen; }
-            set { Imagen = value; NotifyPropertyChanged("Nombre"); }
+            get { return imagen; }
+            set { imagen = value; NotifyPropertyChanged("Nombre"); }
 
         }
+        private bool vengador;
         public bool Vengador
         {
-            get { return Vengador; }
-            set { Vengador = value; NotifyPropertyChanged("Nombre"); }
+            get { return vengador; }
+            set { vengador = value; NotifyPropertyChanged("Nombre"); }
 
         }
+        private bool xmen;
         public bool Xmen
         {
-            get { return Xmen; }
-            set { Xmen = value; NotifyPropertyChanged("Nombre"); }
+            get { return xmen; }
+            set { xmen = value; NotifyPropertyChanged("Nombre"); }
 
         }
+        private bool heroe;
         public bool Heroe
         {
-            get { return Heroe; }
-            set { Heroe = value; NotifyPropertyChanged("Nombre"); }
+            get { return heroe; }
+            set { heroe = value; NotifyPropertyChanged("Nombre"); }
 
         }
 
