@@ -17,6 +17,14 @@
             <Setter Property="TextBlock.FontSize" Value="20"/>
             <Setter Property="TextBlock.FontWeight" Value="Bold"/>
         </Style>
+        <Style x:Key="ImagenBorde" TargetType="{x:Type Border}">
+            <Setter Property="Border.BorderBrush" Value="Black"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=ImagenSuper, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Border.BorderThickness" Value="6"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <DockPanel x:Name="superheroeDockPanel"
              Background="{Binding Path=HeroeActual.Heroe, Converter={StaticResource convertirfondo}}">
@@ -51,6 +59,8 @@
                 </UIElement.RenderTransform>
             </Image>
         </StackPanel>
-        <Image Stretch="UniformToFill" Margin="10" Source="{Binding Path=HeroeActual.Imagen}"/>
+        <Border Style="{StaticResource ImagenBorde}" Margin="10">
+            <Image x:Name="ImagenSuper" Stretch="UniformToFill" Source="{Binding Path=HeroeActual.Imagen}"/>
+        </Border>
     </DockPanel>
 </Window>
