@@ -7,8 +7,6 @@
         mc:Ignorable="d"
         Title="Superheroes" Height="450" Width="800" Icon="Imagenes\shield.ico">
     <Window.Resources>
-        <local:ConvertidorFondo x:Key="convertirfondo"/>
-        <local:ConvertidorEmblema x:Key="convertiremblema"/>
         <Style x:Key="flechas" TargetType="{x:Type Image}">
             <Setter Property="FrameworkElement.Width" Value="24"/>
             <Setter Property="Image.Source" Value="Imagenes/arrow.png"/>
@@ -18,28 +16,85 @@
             <Setter Property="TextBlock.FontWeight" Value="Bold"/>
         </Style>
         <Style x:Key="ImagenBorde" TargetType="{x:Type Border}">
-            <Setter Property="Border.BorderBrush" Value="Black"/>
+            <Setter Property="BorderBrush" Value="Black"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=ImagenSuper, Path=IsMouseOver}" Value="True">
                     <Setter Property="Border.BorderThickness" Value="6"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="ImagenOpacidad" TargetType="{x:Type Image}">
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Stretch" Value="UniformToFill"/>
+            <Style.Triggers>
+                <Trigger Property="UIElement.IsMouseOver" Value="true">
+                    <Setter Property="UIElement.Opacity" Value="1"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="FondoSuperHeroe" TargetType="{x:Type DockPanel}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HeroeActual.Heroe}" Value="true">
+                    <Setter Property="Background" Value="PaleGreen"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=HeroeActual.Heroe}" Value="false">
+                    <Setter Property="Background" Value="IndianRed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LogoVenga" TargetType="{x:Type Image}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Source" Value="Imagenes/avengers.png"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HeroeActual.Vengador}" Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="LogoXmen" TargetType="{x:Type Image}">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Source" Value="Imagenes/xmen.png"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Margin" Value="0,0,10,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=HeroeActual.Xmen}" Value="True">
+                    <Setter Property="UIElement.Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="NombreCambio">
+            <Setter Property="FontSize" Value="40"/>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="80" Duration="0:0:2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="FontSize" To="40" Duration="0:0:2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
-    <DockPanel x:Name="superheroeDockPanel"
-             Background="{Binding Path=HeroeActual.Heroe, Converter={StaticResource convertirfondo}}">
+    <DockPanel x:Name="superheroeDockPanel" Style="{StaticResource FondoSuperHeroe}">
         <DockPanel LastChildFill="false" Dock="Top">
-            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Bottom" FontSize="40" Foreground="White"
+            <TextBlock Style="{StaticResource NombreCambio}" DockPanel.Dock="Left" VerticalAlignment="Bottom" FontSize="40" Foreground="White"
                  FontFamily="Segoe UI Black" Margin="10,0,0,0" Text="{Binding Path=HeroeActual.Nombre}">
         <UIElement.Effect>
           <DropShadowEffect/>
         </UIElement.Effect>
             </TextBlock>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" VerticalAlignment="Bottom">
-                <Image Source="Imagenes/avengers.png" Width="40" Margin="0,0,10,0"
-               Visibility="{Binding Path=HeroeActual.Vengador, Converter={StaticResource convertiremblema}}"/>
-                <Image Source="Imagenes/xmen.png" Width="60"
-               Visibility="{Binding Path=HeroeActual.Xmen, Converter={StaticResource convertiremblema}}"/>
+                <Image Source="Imagenes/avengers.png" Width="40" Margin="0,0,10,0" Style="{StaticResource LogoVenga}"/>
+                <Image Source="Imagenes/xmen.png" Width="60" Style="{StaticResource LogoXmen}"/>
             </StackPanel>
         </DockPanel>
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -60,7 +115,7 @@
             </Image>
         </StackPanel>
         <Border Style="{StaticResource ImagenBorde}" Margin="10">
-            <Image x:Name="ImagenSuper" Stretch="UniformToFill" Source="{Binding Path=HeroeActual.Imagen}"/>
+            <Image Style="{StaticResource ImagenOpacidad}" x:Name="ImagenSuper" Stretch="UniformToFill" Source="{Binding Path=HeroeActual.Imagen}"/>
         </Border>
     </DockPanel>
 </Window>
